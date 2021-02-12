@@ -1,5 +1,5 @@
-from main import ma
-from models.User import User
+from src import ma
+from src.models.User import User
 from marshmallow.validate import Length
 
 class UserSchema(ma.SQLAlchemyAutoSchema):

@@ -1,6 +1,6 @@
-from main import db
+from src import db
 from sqlalchemy.orm import backref
-from models.Profile import Profile
+from src.models.Profile import Profile
 
 
 class User(db.Model):

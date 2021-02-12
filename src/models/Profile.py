@@ -1,6 +1,6 @@
-from main import db
+from src import db
 from sqlalchemy.orm import backref
-from models.ProfileImages import ProfileImages
+from src.models.ProfileImages import ProfileImages
 
 
 class Profile(db.Model):
@@ -11,7 +11,6 @@ class Profile(db.Model):
     fname = db.Column(db.String(), nullable=False)
     lname = db.Column(db.String(), nullable=False)
     account_active = db.Column(db.Boolean(), default = True)
-    admin = db.Column(db.Boolean(), default = False)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     profile_image = db.relationship("ProfileImages", backref="profile", uselist=False)
     

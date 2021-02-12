@@ -1,5 +1,5 @@
-from main import ma
-from models.ProfileImages import ProfileImages
+from src import ma
+from src.models.ProfileImages import ProfileImages
 from marshmallow.validate import Length
 
 class ProfileImagesSchema(ma.SQLAlchemyAutoSchema):

@@ -1,11 +1,11 @@
-from models.ProfileImages import ProfileImages
-from models.Profile import Profile
-from schemas.ProfileImagesSchema import profile_image_schema
+from src.models.ProfileImages import ProfileImages
+from src.models.Profile import Profile
+from src.schemas.ProfileImagesSchema import profile_image_schema
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask import Blueprint, request, jsonify, abort, current_app, Response
-from services.auth_services import verify_user
+from src.services.auth_services import verify_user
 from pathlib import Path
-from main import db
+from src import db
 import boto3
 
 

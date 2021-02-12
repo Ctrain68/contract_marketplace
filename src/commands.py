@@ -1,4 +1,4 @@
-from main import db
+from src import db
 from flask import Blueprint
 
 db_commands = Blueprint("db-custom", __name__)
@@ -16,10 +16,10 @@ def drop_db():
 
 @db_commands.cli.command("seed")
 def seed_db():
-    from models.User import User
-    from models.Profile import Profile
+    from src.models.User import User
+    from src.models.Profile import Profile
     from faker import Faker
-    from main import bcrypt
+    from src import bcrypt
     import random
     from random import seed
     from random import randint

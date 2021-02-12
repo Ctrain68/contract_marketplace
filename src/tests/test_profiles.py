@@ -1,7 +1,7 @@
 import unittest
-from main import create_app, db
-from models.Profile import Profile
-from models.User import User
+from src import create_app, db
+from src.models.Profile import Profile
+from src.models.User import User
 
 class TestProfiles(unittest.TestCase):
     @classmethod
@@ -12,7 +12,7 @@ class TestProfiles(unittest.TestCase):
         cls.client = cls.app.test_client()
         db.create_all()
         runner = cls.app.test_cli_runner()
-        runner.invoke(args=["db", "seed"])
+        runner.invoke(args=["db-custom", "seed"])
 
     @classmethod
     def tearDown(cls):
@@ -24,7 +24,7 @@ class TestProfiles(unittest.TestCase):
 
 
     def test_profiles_index(self):
-        response= self.client.get("/profile/")
+        response= self.client.get("/profile/all")
 
         data = response.get_json()
 
@@ -34,18 +34,20 @@ class TestProfiles(unittest.TestCase):
     def test_profile_create(self):
         response = self.client.post("/auth/register",                   
         json = {                                                        
-            "email": "test1@test.com",
+            "email": "test11@test.com",
             "password": "123456"
         })
         response = self.client.post("/auth/login",                      
         json = {              
-            "email": "test1@test.com",
+            "email": "test11@test.com",
             "password": "123456"
         })                    
         data = response.get_json()                                      
         headers_data= {                                                 
             'Authorization': f"Bearer {data['token']}"
         }
+        
+
         data = {                                                       
             "username" : "test_username", 
             "fname" : "test", 

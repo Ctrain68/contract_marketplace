@@ -1,4 +1,4 @@
-from main import db
+from src import db
 
 class ProfileImages(db.Model):
     __tablename__ = 'profile_images'

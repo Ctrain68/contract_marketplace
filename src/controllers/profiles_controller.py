@@ -1,11 +1,11 @@
 from flask import Blueprint, request, jsonify, abort
-from schemas.ProfileSchema import profile_schema, profiles_schema
-from models.Profile import Profile
-from models.User import User
+from src.schemas.ProfileSchema import profile_schema, profiles_schema
+from src.models.Profile import Profile
+from src.models.User import User
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from services.auth_services import verify_user
+from src.services.auth_services import verify_user
 from sqlalchemy.sql import func, label
-from main import db
+from src import db
 import os
 import json
 
@@ -52,7 +52,6 @@ def profile_create(user=None):
         new_profile.fname = profile_fields["fname"]
         new_profile.lname = profile_fields["lname"]
         new_profile.account_active=profile_fields["account_active"]
-        new_profile.admin=profile_fields["admin"]
         
         user.profile.append(new_profile)
         
