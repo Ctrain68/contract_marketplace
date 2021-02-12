@@ -1,0 +1,297 @@
+openapi: '3.0.2'
+info:
+  title: Shredrent
+  version: '1.0'
+
+paths:
+  /auth/register:
+    post:
+      tags: 
+      - "User"
+      summary: Register Account
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Account Already
+  /auth/login:
+    post:
+      tags: 
+      - "User"
+      summary: "Login to Account"
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Incorrect username or password
+
+
+
+
+         
+
+  /profile/:
+    get:
+      tags:
+      - "Profile"
+      summary: "User Profile List"
+      responses:
+        '200':
+          description: OK
+    post:
+      tags:
+      - "Profile"
+      summary: "Create New User"
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: User Profile already exists
+  /profile/username:
+    post:
+      tags:
+      - "Profile"
+      summary: "Search for User by Username"  
+      responses:
+        '200':
+          description: OK
+    put:
+      tags:
+      - "Profile"
+      summary: "Update User by Username"  
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: "Unauthorised to update this user"
+    delete:
+      tags:
+      - "Profile"
+      summary: "Delete User by Username"  
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Unauthorised to delete user
+  /profile/profile_id/image/:
+    post:
+      tags:
+      - Profile image
+      summary: Upload Profile Image
+      responses:
+        '201':
+          description: OK
+        '401':
+          description: Invalid Usern
+        '400':
+          description: Missing image
+        '402':
+          description: Invalid File Type 
+    get:
+      tags:
+      - Profile image
+      summary: Retrive Image
+      responses:
+        '201':
+          description: OK
+        '401':
+          description: Invalid User
+    delete:
+      tags:
+      - Profile image
+      summary: Delete Profile Image
+      responses:
+        '204':
+          description: OK
+        '401':
+          description: Invalid User
+  /profile/equipment/:
+    get:
+      tags:
+      - "Equipment"
+      summary: Retrieve All Equipment
+      responses:
+        '201':
+          description: OKr 
+  /profile/equipment/available:
+    get:
+      tags:
+      - "Equipment"
+      summary: Retrieve All Equipment available equipment
+      responses:
+        '201':
+          description: OK
+  /profile/equipment/count:
+    get:
+      tags:
+      - "Equipment"
+      summary: Retrieve a count of equipment by catergory that is available
+      responses:
+        '201':
+          description: OK 
+  /profile/equipment/average:
+    get:
+      tags:
+      - "Equipment"
+      summary: Retrieve average rentpw per gym equipment category
+      responses:
+        '201':
+          description: OK
+  /profile/equipment/profile:
+    post:
+      tags:
+      - "Equipment"
+      summary: Create Equipment Entry
+      responses:
+        '201':
+          description: OK
+        '400':
+          description: Invalid User
+
+  /profile/equipment/<int:profileid>:    
+    put:
+      tags:
+      - "Equipment"
+      summary: Update Equipment
+      responses:
+        '201':
+          description: OK
+        '400':
+          description: Invalid User   
+    delete:
+      tags:
+      - "Equipment"
+      summary: Update Goal or Target that is being tracked
+      responses:
+        '201':
+          description: OK
+        '400':
+          description: Invalid User 
+  /EquipmentOrder/all:
+    get:
+      tags:
+      - "EquipmentOrder"
+      summary: Returns all equipment orders
+      responses:
+        '201':
+          description: OK
+  /EquipmentOrder/rented:
+    get:
+      tags:
+      - "EquipmentOrder"
+      summary: Returns all equipment orders that are rented
+      responses:
+        '201':
+          description: OK
+    # post:
+    #   tags:
+    #   - "EquipmentOrder"
+    #   summary: Create a Tribe
+    #   responses:
+    #     '201':
+    #       description: OK
+    #     '400':
+    #       description: Invalid User
+    # put:
+    #   tags:
+    #   - "EquipmentOrder"
+    #   summary: Update a Tribe
+    #   responses:
+    #     '201':
+    #       description: OK
+    #     '400':
+    #       description: Invalid User
+    # delete:
+    #   tags:
+    #   - "EquipmentOrder"
+    #   summary: Delete a Tribe
+    #   responses:
+    #     '201':
+    #       description: OK
+    #     '400':
+    #       description: Invalid User
+  # /tribe/tribename:
+  #   get:
+  #     tags:
+  #     - "Tribe"
+  #     summary: Returns tribe by tribename
+  #     responses:
+  #       '201':
+  #         description: OK
+  #       '400':
+  #         description: Invalid User
+  # /tribe/public:
+  #   get:
+  #     tags:
+  #     - "Tribe"
+  #     summary: Returns all Public tribes
+  #     responses:
+  #       '201':
+  #         description: OK
+  #       '400':
+  #         description: Invalid User
+
+
+  # /user/tribe/:
+  #   get:
+  #     tags:
+  #     - "User/Tribe"
+  #     summary: returns all tribes with usersnames nested
+  #     responses:
+  #       '201':
+  #         description: OK
+  #       '400':
+  #         description: Invalid User
+
+  # /user/tribe/tribename:
+  #   get:
+  #     tags:
+  #     - "User/Tribe"
+  #     summary: returns users for a specific tribe
+  #     responses:
+  #       '201':
+  #         description: OK
+  #       '400':
+  #         description: Invalid User
+  #   post:
+  #     tags:
+  #     - "User/Tribe"
+  #     summary: add user to a tribe, tribe must be public
+  #     responses:
+  #       '201':
+  #         description: OK
+  #       '400':
+  #         description: Invalid User
+  #   delete:
+  #     tags:
+  #     - "User/Tribe"
+  #     summary: returns users for a specific tribe
+  #     responses:
+  #       '201':
+  #         description: OK
+  #       '400':
+  #         description: Invalid User
+
+
+  # /user/tribe/username:
+  #   get:
+  #     tags:
+  #     - "User/Tribe"
+  #     summary: Search for a Tribes by username
+  #     responses:
+  #       '201':
+  #         description: OK
+  #       '400':
+  #         description: Invalid User
+
+
+    
+
+           
+
+
+
+
+
+
+          
