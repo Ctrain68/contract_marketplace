@@ -1,0 +1,13 @@
+[Unit]
+Description=Gunicorn managing flask application
+After=network.target
+
+[Service]
+EnvironmentFile=/.env
+User=ubuntu
+WorkingDirectory=/code
+ExecStart=/home/ubuntu/.local/bin/gunicorn -b 0.0.0.0:5000 -w 3 "main:create_app()"
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

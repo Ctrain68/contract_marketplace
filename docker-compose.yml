@@ -1,0 +1,66 @@
+version: "3.8"
+services:
+  database:
+    container_name: flask_postgres
+    image: postgres:latest
+    env_file: .env
+    volumes:
+      - type: volume
+        source: flask_postgres_data
+        target: /var/lib/postgresql/data
+    networks:
+      - flask_app_network
+  flask:
+    container_name: flask_app
+    build: .
+    image: contract_app_1
+    env_file: .env
+    ports:
+      - "5000:5000"
+    networks:
+      - flask_app_network
+    volumes:
+      - type: bind
+        source: ./contract
+        target: /home
+    command: flask run -h 0.0.0.0
+    depends_on:
+      - database
+      - migration
+  drop:
+    build: .
+    image: contract_app_1
+    env_file: .env
+    networks:
+      - flask_app_network
+    command: flask db-custom drop
+    depends_on:
+      - database
+  migration:
+    build: .
+    image: contract_app_1
+    env_file: .env
+    networks:
+      - flask_app_network
+    command: flask db upgrade
+    depends_on:
+      - database
+      - drop
+  Seed:
+    build: .
+    image: contract_app_1
+    env_file: .env
+    networks:
+      - flask_app_network
+    command: flask db-custom seed
+    depends_on:
+      - database
+      - migration
+      - drop
+volumes:
+  flask_postgres_data:
+    name: flask_postgres_data
+networks:
+  flask_app_network:
+    name: flask_app_network
+    driver: bridge
