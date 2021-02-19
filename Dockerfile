@@ -27,7 +27,9 @@ COPY . .
 
 RUN chmod +x script.sh
 
-RUN ./script.sh
+# RUN ./script.sh
+
+RUN chmod +x script1.sh
 
 
 RUN apt-get install python3-pip -y
@@ -41,4 +43,4 @@ ENV FLASK_ENV=development
 
 
 
-CMD [ "flask", "run", "-h", "0.0.0.0" ]
+CMD ./script.sh
