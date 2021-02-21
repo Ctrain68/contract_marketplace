@@ -25,21 +25,58 @@ jobs:
         run: |
           echo DB_URI=sqlite:///:memory: >> .env
           python -m unittest discover src/tests/
-#  deployment:
-    #    needs: test_suite
-    #    runs-on: ubuntu-latest
-    #    steps:
-    #      - name: Fresh clone & repo install
-    #        uses: appleboy/ssh-action@master
-    #        with:
-    #          host: 34.198.255.72
-    #          username: github-actions
-    #          key: ${{ secrets.EC2 }}
-    #          port: 22
-    #          script: |
-    #            rm -rf contract_marketplace
-    #            git clone https://github.com/Ctrain68/contract_marketplace.git
-    #            python3 -m venv /home/github-actions/contract_marketplace/venv
-    #            source /home/github-actions/contract_marketplace/venv/bin/activate
-    #            pip install -r /home/github-actions/contract_marketplace/requirements.txt
-    #            chmod +x /home/github-actions/contract_marketplace/script1.sh
+  deployment:
+       needs: test_suite
+       runs-on: ubuntu-latest
+       steps:
+         - name: Fresh clone & repo install
+           uses: appleboy/ssh-action@master
+           with:
+             host: 34.198.255.72
+             username: github-actions
+             key: ${{ secrets.EC2 }}
+             port: 22
+             script: |
+               rm -rf contract_marketplace
+               git clone https://github.com/Ctrain68/contract_marketplace.git
+               python3 -m venv /home/github-actions/contract_marketplace/venv
+               source /home/github-actions/contract_marketplace/venv/bin/activate
+               pip install -r /home/github-actions/contract_marketplace/requirements.txt
+               chmod +x /home/github-actions/contract_marketplace/script1.sh
+               /home/github-actions/contract_marketplace/./script1.sh
+               cd /home/github-actions/contract_marketplace
+               flask run
+  deploy:
+    needs: deployment
+    name: Deploy ec2
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
+
+    - name: Build, tag, and push image to Amazon ECR
+      id: build-image
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: contract_app_flask
+        IMAGE_TAG: latest
+      run: |
+        # Build a docker container and push it to ECR 
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        echo "Pushing image to ECR..."
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+
+

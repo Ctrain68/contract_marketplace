@@ -7,16 +7,16 @@
 #    Replace the value of `ECR_REPOSITORY` in the workflow below with your repository's name.
 #    Replace the value of `aws-region` in the workflow below with your repository's region.
 
-on:
-  push:
-    branches: [ main ]
+# on:
+#   push:
+#     branches: [ main ]
 
 
-name: Flask Project 'contract' CI on ECR
+# name: Flask Project 'contract' CI on ECR
 
 jobs:
   deploy:
-    name: Deploy
+    name: Deploy ec2
     runs-on: ubuntu-latest
 
     steps:
