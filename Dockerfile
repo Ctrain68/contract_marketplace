@@ -18,7 +18,7 @@ RUN apt-get install unzip -y
 
 RUN unzip awscliv2.zip
 
-
+RUN ./aws/install
 
 
 WORKDIR /code
@@ -29,7 +29,7 @@ RUN chmod +x script.sh
 
 # RUN ./script.sh
 
-RUN chmod +x script1.sh
+# RUN chmod +x script1.sh
 
 
 RUN apt-get install python3-pip -y

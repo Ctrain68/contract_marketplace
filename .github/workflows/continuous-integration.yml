@@ -1,7 +1,7 @@
 name: CI/CD
 on:
   push:
-    branches: [ feature ]
+    branches: [ main ]
 jobs:
   test_suite:
     runs-on: ubuntu-latest
@@ -32,13 +32,14 @@ jobs:
     #      - name: Fresh clone & repo install
     #        uses: appleboy/ssh-action@master
     #        with:
-    #          host: 34.194.100.219
+    #          host: 34.198.255.72
     #          username: github-actions
     #          key: ${{ secrets.EC2 }}
     #          port: 22
     #          script: |
-    #            rm -rf astroapp
-    #            git clone https://github.com/Ctrain68/astroapp.git
-    #            python3.9 -m venv /home/github-actions/astroapp/venv
-    #            source /home/github-actions/astroapp/venv/bin/activate
-    #            pip install -r /home/github-actions/astroapp/requirements.txt
+    #            rm -rf contract_marketplace
+    #            git clone https://github.com/Ctrain68/contract_marketplace.git
+    #            python3 -m venv /home/github-actions/contract_marketplace/venv
+    #            source /home/github-actions/contract_marketplace/venv/bin/activate
+    #            pip install -r /home/github-actions/contract_marketplace/requirements.txt
+    #            chmod +x /home/github-actions/contract_marketplace/script1.sh

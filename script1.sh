@@ -1,7 +1,4 @@
 #!/bin/bash
 
-mkdir cheese
-cd cheese
-touch pizaa.txt
+aws s3 cp s3://col-env-bucket/contract_app_env/.env /home/github-actions/contract_marketplace/.env
 
-flask run -h 0.0.0.0
