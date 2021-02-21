@@ -45,7 +45,7 @@ jobs:
                chmod +x /home/github-actions/contract_marketplace/script1.sh
                /home/github-actions/contract_marketplace/./script1.sh
                cd /home/github-actions/contract_marketplace
-               flask run
+               flask run 
   deploy:
     needs: deployment
     name: Deploy ec2
