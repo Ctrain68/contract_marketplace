@@ -45,10 +45,10 @@ jobs:
                chmod +x /home/github-actions/contract_marketplace/script1.sh
                /home/github-actions/contract_marketplace/./script1.sh
                cd /home/github-actions/contract_marketplace
-               gunicorn -b 0.0.0.0 -w 3 "src:create_app()"
+              #  gunicorn -b 0.0.0.0 -w 3 "src:create_app()"
   deploy:
     needs: deployment
-    name: Deploy ec2
+    name: Deploy ECS
     runs-on: ubuntu-latest
 
     steps:
