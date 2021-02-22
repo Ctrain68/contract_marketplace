@@ -48,7 +48,7 @@ jobs:
                flask db-custom drop
                flask db upgrade
                flask db-custom seed
-              #  gunicorn -b 0.0.0.0 -w 3 "src:create_app()"
+               gunicorn -b 0.0.0.0 -w 3 "src:create_app()"
   deploy:
     needs: deployment
     name: Deploy ECS
