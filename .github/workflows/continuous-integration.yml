@@ -43,9 +43,11 @@ jobs:
                source /home/github-actions/contract_marketplace/venv/bin/activate
                pip install -r /home/github-actions/contract_marketplace/requirements.txt
                chmod +x /home/github-actions/contract_marketplace/script1.sh
-               
+               /home/github-actions/contract_marketplace/./script1.sh
                cd /home/github-actions/contract_marketplace
-               ./script1.sh
+               flask db-custom drop
+               flask db upgrade
+               flask db-custom seed
               #  gunicorn -b 0.0.0.0 -w 3 "src:create_app()"
   deploy:
     needs: deployment
