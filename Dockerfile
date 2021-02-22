@@ -41,6 +41,7 @@ ENV FLASK_APP=run.py
 
 ENV FLASK_ENV=development
 
+EXPOSE 8000
 
 
 CMD ./script.sh
