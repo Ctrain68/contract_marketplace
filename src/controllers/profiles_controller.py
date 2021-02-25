@@ -14,7 +14,7 @@ import json
 profile = Blueprint("profile", __name__, url_prefix="/profile")
 
 @profile.route("/a", methods=["GET"])
-def profile_index():
+def profile_sparkles():
     return "Sparkles"
 
    

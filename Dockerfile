@@ -38,7 +38,7 @@ RUN chmod +x script.sh
 RUN pip3 install -r requirements.txt
 
 
-ENV FLASK_APP=run.py
+ENV FLASK_APP=src:create_app()
 
 ENV FLASK_ENV=development
 
@@ -47,4 +47,4 @@ EXPOSE 8000
 
 # CMD ./script.sh
 
-CMD gunicorn -b 0.0.0.0:8000 -w 3 "src:create_app()"
+CMD [ "gunicorn", "-b", "0.0.0.0:8000", "src:create_app()"]
