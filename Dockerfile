@@ -1,15 +1,19 @@
-FROM python:3.8-slim
+FROM ubuntu
 
 
-# RUN apt-get clean
 
-# RUN apt-get update
 
-# RUN apt-get install curl -y
+RUN apt-get clean
 
-# RUN apt-get install python3.8 -y
+RUN apt-get update
 
-# RUN apt-get install python3.8 libpq-dev wait-for-it -y
+RUN apt-get install curl -y
+
+RUN apt-get install python3.8 -y
+
+RUN apt-get install python3.8 libpq-dev wait-for-it -y
+
+RUN apt-get install telnet -y
 
 
 
@@ -26,14 +30,14 @@ WORKDIR /code
 
 COPY . .
 
-RUN chmod +x script.sh
+# RUN chmod +x script.sh
 
 # RUN ./script.sh
 
 # RUN chmod +x script1.sh
 
 
-# RUN apt-get install python3-pip -y
+RUN apt-get install python3-pip -y
 
 RUN pip3 install -r requirements.txt
 
@@ -47,4 +51,4 @@ EXPOSE 8000
 
 # CMD ./script.sh
 
-CMD [ "gunicorn", "-b", "0.0.0.0:8000", "src:create_app()"]
+CMD [ "gunicorn", "-b", "0.0.0.0:8000","--access-logfile","-","src:create_app()"]
