@@ -117,7 +117,8 @@ auth = Blueprint('auth', __name__,)
 #     return redirect(url_for('profiles.home'))
 
 
-@auth.route("/", methods=["GET", "POST"])
+@auth.route("/", methods=["GET"])
+@auth.route("/home", methods=["GET"])
 def auth_home():
     return render_template('home.html')
 
