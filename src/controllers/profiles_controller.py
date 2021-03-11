@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, abort
+from flask import Blueprint, request, jsonify, abort, render_template
 from src.schemas.ProfileSchema import profile_schema, profiles_schema
 from src.models.Profile import Profile
 from src.models.User import User
@@ -13,9 +13,9 @@ import json
 
 profile = Blueprint("profile", __name__, url_prefix="/profile")
 
-@profile.route("/a", methods=["GET"])
+@profile.route("/", methods=["GET"])
 def profile_sparkles():
-    return "Sparkles"
+        return render_template('home.html')
 
    
 
@@ -56,6 +56,8 @@ def profile_create(user=None):
         new_profile.fname = profile_fields["fname"]
         new_profile.lname = profile_fields["lname"]
         new_profile.account_active=profile_fields["account_active"]
+        new_profile.employer=profile_fields["employer"]
+        new_profile.employer=profile_fields["contractor"]
         
         user.profile.append(new_profile)
         

@@ -43,6 +43,8 @@ def seed_db():
         profile.fname = faker.first_name()
         profile.lname = faker.last_name()
         profile.account_active=faker.boolean()
+        profile.employer=faker.boolean()
+        profile.contractor=faker.boolean()
         profile.user_id = i+1
         profiles.append(profile)
         db.session.add(profile)

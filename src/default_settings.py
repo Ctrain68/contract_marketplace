@@ -5,6 +5,7 @@ import os
 class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     JWT_SECRET_KEY = "duck"
+    SECRET_KEY = "learning flask login"
     
 
     #1mb for file size uploads

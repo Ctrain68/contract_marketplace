@@ -11,6 +11,9 @@ class ProfileSchema(ma.SQLAlchemyAutoSchema):
     fname = ma.String(required=True, validate=Length(min=1))
     lname = ma.String(required=True, validate=Length(min=1))
     account_active = ma.Boolean(required=True)
+    employer = ma.Boolean(required=True)
+    contractor = ma.Boolean(required=True)
+
     user = ma.Nested(UserSchema)
 
 profile_schema = ProfileSchema()
