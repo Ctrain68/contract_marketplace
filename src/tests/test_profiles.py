@@ -52,7 +52,9 @@ class TestProfiles(unittest.TestCase):
             "username" : "test_username", 
             "fname" : "test", 
             "lname" : "test",
-            "account_active": "True"
+            "account_active": "True",
+            "contractor": "True",
+            "employer": "False"
         }
         response = self.client.post("/profile/",                       
         json = data,                                                    

@@ -13,9 +13,9 @@ import json
 
 profile = Blueprint("profile", __name__, url_prefix="/profile")
 
-@profile.route("/", methods=["GET"])
-def profile_sparkles():
-        return render_template('home.html')
+# @profile.route("/", methods=["GET"])
+# def profile_sparkles():
+#         return render_template('home.html')
 
    
 
