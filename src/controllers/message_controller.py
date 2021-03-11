@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify, abort, render_template
-from src.schemas.MessageSchema import message_schema, messsages_schema
+from src.schemas.MessageSchema import message_schema, messages_schema
+from src.models.Message import Message
 from src.models.Profile import Profile
 from src.models.User import User
 from flask_jwt_extended import jwt_required, get_jwt_identity
@@ -11,17 +12,17 @@ import json
 
 
 
-profile = Blueprint("message", __name__, url_prefix="/contract/message")
+message = Blueprint("message", __name__, url_prefix="/contract/message")
     
 
    
 
 
-# @message.route("/all", methods=["GET"])
-# def message_index():
-#     query = db.session.query(Profile)
+@message.route("/all", methods=["GET"])
+def message_index():
+    query = db.session.query(Message)
 
-#     return jsonify(profiles_schema.dump(query))
+    return jsonify(messages_schema.dump(query))
 
 
 # @messag.route("/active", methods=["GET"])

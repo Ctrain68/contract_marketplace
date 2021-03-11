@@ -14,7 +14,7 @@ class EngagementSchema(ma.SQLAlchemyAutoSchema):
     end_date = ma.DateTime(required = True)
     contract = ma.Nested(ContractSchema)
 
-engagement_schema = ProfileSchema()
-engagements_schema = ProfileSchema(many=True)
+engagement_schema = EngagementSchema()
+engagements_schema = EngagementSchema(many=True)
 
 

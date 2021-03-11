@@ -9,9 +9,9 @@ class MessageSchema(ma.SQLAlchemyAutoSchema):
         model = Message
     message = ma.String(required=True, validate=Length(min=1))
     message_sent = ma.Int(required=True, validate=Length(min=1))
-    contract = ma.Nested(ProfileSchema)
+    contract = ma.Nested(ContractSchema)
 
-message_schema = ProfileSchema()
-messsages_schema = ProfileSchema(many=True)
+message_schema = MessageSchema()
+messages_schema = MessageSchema(many=True)
 
 

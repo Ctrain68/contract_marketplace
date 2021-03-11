@@ -12,14 +12,14 @@ class ContractSchema(ma.SQLAlchemyAutoSchema):
     capacity_in_days = ma.Int(required=True, validate=Length(min=1))
     hours_of_work = ma.Int(required=True, validate=Length(min=1))
     sector = ma.String(required=True, validate=Length(min=1))
-    sub-sector = ma.String(required=True, validate=Length(min=1))
+    sub_sector = ma.String(required=True, validate=Length(min=1))
     skill_set = ma.String(required=True, validate=Length(min=1))
     location = ma.String(required=True, validate=Length(min=1))
     about = ma.String(required=True, validate=Length(min=1))
     resume = ma.String(required=True, validate=Length(min=1))
     profile = ma.Nested(ProfileSchema)
 
-contract_schema = ProfileSchema()
-contracts_schema = ProfileSchema(many=True)
+contract_schema = ContractSchema()
+contracts_schema = ContractSchema(many=True)
 
 

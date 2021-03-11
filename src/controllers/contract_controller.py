@@ -1,5 +1,7 @@
 from flask import Blueprint, request, jsonify, abort, render_template
 from src.schemas.ProfileSchema import profile_schema, profiles_schema
+from src.schemas.ContractSchema import contract_schema, contracts_schema
+from src.models.Contract import Contract
 from src.models.Profile import Profile
 from src.models.User import User
 from flask_jwt_extended import jwt_required, get_jwt_identity
@@ -11,17 +13,17 @@ import json
 
 
 
-profile = Blueprint("contract", __name__, url_prefix="/contract")
+contract = Blueprint("contract", __name__, url_prefix="/contract")
     
 
    
 
 
-# @contract.route("/all", methods=["GET"])
-# def contract_index():
-#     query = db.session.query(Profile)
+@contract.route("/all", methods=["GET"])
+def contract_index():
+    query = db.session.query(Contract)
 
-#     return jsonify(profiles_schema.dump(query))
+    return jsonify(contracts_schema.dump(query))
 
 
 # @contract.route("/active", methods=["GET"])

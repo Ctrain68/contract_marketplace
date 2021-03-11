@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify, abort, render_template
 from src.schemas.EngagementSchema import engagement_schema, engagements_schema
+from src.models.Engagement import Engagement
 from src.models.Profile import Profile
 from src.models.User import User
 from flask_jwt_extended import jwt_required, get_jwt_identity
@@ -11,17 +12,17 @@ import json
 
 
 
-profile = Blueprint("engagement", __name__, url_prefix="/contract/engagement")
+engagement = Blueprint("engagement", __name__, url_prefix="/contract/engagement")
     
 
    
 
 
-# @engagement.route("/all", methods=["GET"])
-# def engagement_index():
-#     query = db.session.query(Profile)
+@engagement.route("/all", methods=["GET"])
+def engagement_index():
+    query = db.session.query(Engagement)
 
-#     return jsonify(profiles_schema.dump(query))
+    return jsonify(engagements_schema.dump(query))
 
 
 # @engagement.route("/active", methods=["GET"])

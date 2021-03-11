@@ -9,9 +9,9 @@ class Message(db.Model):
 
     messageid =db.Column(db.Integer, primary_key=True)
     message = db.Column(db.String(), nullable=False)
-    message_sent = db.Column(db.Datetime(), nullable=False, default=datetime.now)
-    profile_id = db.Column(db.Integer, db.ForeignKey("profile.profileid"), nullable=False)
-    contract_id = db.Column(db.Integer, db.ForeignKey("contract.contractid"), nullable=False)
+    message_sent = db.Column(db.DateTime(), nullable=False, default=datetime.now)
+    profile_id = db.Column(db.Integer, db.ForeignKey("profiles.profileid"), nullable=False)
+    contract_id = db.Column(db.Integer, db.ForeignKey("contracts.contractid"), nullable=False)
 
 
     
