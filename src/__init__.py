@@ -18,7 +18,7 @@ ma = Marshmallow()
 bcrypt = Bcrypt()
 jwt = JWTManager()
 migrate = Migrate()
-csrf = CSRFProtect()
+# csrf = CSRFProtect()
 login_manager = LoginManager()
 
 def create_app():
@@ -37,7 +37,7 @@ def create_app():
     migrate.init_app(app, db)
     login_manager.init_app(app)
     login_manager.login_view = "auth.login"
-    csrf.init_app(app)
+    # csrf.init_app(app)
 
     from src.models.User import get_user
 

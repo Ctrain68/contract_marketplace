@@ -32,12 +32,12 @@ class TestProfiles(unittest.TestCase):
         self.assertIsInstance(data, list)
 
     def test_profile_create(self):
-        response = self.client.post("/auth/register",                   
+        response = self.client.post("/register",                   
         json = {                                                        
             "email": "test11@test.com",
             "password": "123456"
         })
-        response = self.client.post("/auth/login",                      
+        response = self.client.post("/login",                      
         json = {              
             "email": "test11@test.com",
             "password": "123456"
