@@ -7,6 +7,7 @@ from src.models.User import User
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from src.services.auth_services import verify_user
 from sqlalchemy.sql import func, label
+from sqlalchemy.orm import joinedload
 from src import db
 import os
 import json
@@ -26,89 +27,85 @@ def contract_index():
     return jsonify(contracts_schema.dump(query))
 
 
-# @contract.route("/active", methods=["GET"])
-# def profile_index_active():
- 
-#     query = db.session.query(Profile).filter(Profile.account_active).order_by(Profile.fname)
-#     return jsonify(profiles_schema.dump(query))
 
 
 
-
-# @contract.route("/", methods=["POST"])
-# @jwt_required
-# @verify_user
-# def contract_create(user=None):
+@contract.route("/", methods=["POST"])
+@jwt_required
+@verify_user
+def contract_create(user=None):
     
 
-#     user_id = get_jwt_identity()
+    user_id = get_jwt_identity()
+
+    profile = Profile.query.get(user_id)
 
     
-#     profile_fields = profile_schema.load(request.json)
+    contract_fields = contract_schema.load(request.json)
 
-#     profile = Profile.query.get(user_id)
-
-#     if not profile:
     
-#         new_profile = Profile()
-#         new_profile.username = profile_fields["username"]
-#         new_profile.fname = profile_fields["fname"]
-#         new_profile.lname = profile_fields["lname"]
-#         new_profile.account_active=profile_fields["account_active"]
-#         new_profile.employer=profile_fields["employer"]
-#         new_profile.employer=profile_fields["contractor"]
+    new_contract = Contract()
+    new_contract.title = contract_fields["title"]
+    new_contract.capacity_in_days = contract_fields["capacity_in_days"]
+    new_contract.hours_of_work=contract_fields["hours_of_work"]
+    new_contract.sector=contract_fields["sector"]
+    new_contract.sub_sector=contract_fields["sub_sector"]
+    new_contract.skill_set=contract_fields["skill_set"]
+    new_contract.location=contract_fields["location"]
+    new_contract.about=contract_fields["about"]
+  
+
         
-#         user.profile.append(new_profile)
+    profile.contract.append(new_contract)
         
-#         db.session.add(new_profile)
-#         db.session.commit()
+    db.session.add(new_contract)
+    db.session.commit()
         
-#         return jsonify(profile_schema.dump(new_profile))
+    return jsonify(contract_schema.dump(new_contract))
+
+
+@contract.route("/<string:title>", methods=["GET"])
+
+def contract_show(title):
+    #Return a singlecontract
+    contract = Contract.query.filter_by(title = title).first()
+    return jsonify(contract_schema.dump(contract))
+
+@contract.route("/<int:id>", methods=["PUT", "PATCH"])
+@jwt_required
+@verify_user
+def contract_update(user, id):
+
+
+    contract =Contract.query.filter_by(contractid = id, profile_id=user.id)
     
-#     else:
-#         return abort(401, description='User Profile already exists')
+    contract_fields = contract_schema.load(request.json)
 
-# @contract.route("/<string:username>", methods=["GET"])
-
-# def contract_show(username):
-#     #Return a single user
-#     profile = Profile.query.filter_by(username = username).first()
-#     return jsonify(profile_schema.dump(profile))
-
-# @contract.route("/<int:id>", methods=["PUT", "PATCH"])
-# @jwt_required
-# @verify_user
-# def contract_update(user, id):
-
-
-#     profile = Profile.query.filter_by(profileid = id, user_id=user.id)
-    
-#     profile_fields = profile_schema.load(request.json)
-
-#     if not profile:
-#         return abort(401, description="Unauthorised to update this user")
+    if not contract:
+        return abort(401, description="Unauthorised to update this user")
     
     
-#     profile.update(profile_fields)
-#     db.session.commit()
+    contract.update(contract_fields)
+    db.session.commit()
     
-#     return jsonify(profile_schema.dump(profile[0]))
+    return jsonify(contract_schema.dump(contract[0]))
 
-# @contract.route("/<int:id>", methods=["DELETE"])
-# @jwt_required
-# @verify_user
-# def contract_delete(user, id):
-
-
-#     profile = Profile.query.filter_by(profileid = id, user_id=user.id).first()
+@contract.route("/<int:id>", methods=["DELETE"])
+@jwt_required
+@verify_user
+def contract_delete(user, id):
 
 
-#     if not profile:
-#         return abort(400, description="Unauthorised to delete user")
-#     db.session.delete(profile)
-#     db.session.commit()
+    contract =Contract.query.options(joinedload("profile")).filter_by(contractid = id, profile_id=user.id).first()
+    # equipment = Equipment.query.options(joinedload("profile")).filter_by(id = id, owner_id=user.id).first()
 
-#     return jsonify(profile_schema.dump(profile))
+
+    if not contract:
+        return abort(400, description="Unauthorised to delete user")
+    db.session.delete(contract)
+    db.session.commit()
+
+    return jsonify(contract_schema.dump(contract))
 
 
 

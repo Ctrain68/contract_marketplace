@@ -18,7 +18,7 @@ class Profile(db.Model):
     contractor = db.Column(db.Boolean(), default = False)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     profile_image = db.relationship("ProfileImages", backref="profile", uselist=False)
-    contract = db.relationship("Contract", backref="profile")
+    contract = db.relationship("Contract", backref="profile", lazy='dynamic')
     message = db.relationship("Message", backref="profile")
     engagement = db.relationship("Engagement", backref="profile")
     
