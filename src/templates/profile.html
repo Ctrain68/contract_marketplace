@@ -1,12 +1,18 @@
 {% extends "layout.html" %}
 {% block content %}
+<main class="page landing-page">
+    <section class="clean-block clean-hero" style="background-image:url(&quot;assets/img/tech/image4.jpg&quot;);color:rgba(9, 162, 255, 0.85);">
+        <div class="text">
   <article class="media content-section">
     <img class="rounded-circle article-img" >
     <div class="media-body">
       <div class="article-metadata">
-        <a class="mr-2">{{ profile.fname }} {{ profile.lname }}</a>
+        <a class="mr-2">Name {{ profile.fname }} {{ profile.lname }}</a>
       </div>
-      <h2 class="article-title">{{ profile.username }}</h2>
+      <h2 class="article-title">Profile Username {{ profile.username }}</h2>
     </div>
   </article>
+  </div>
+  </section>
+  </main>
 {% endblock content %}

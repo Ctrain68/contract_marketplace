@@ -4,7 +4,7 @@
     <section class="clean-block clean-hero" style="background-image:url(&quot;assets/img/tech/image4.jpg&quot;);color:rgba(9, 162, 255, 0.85);">
         <div class="text">
     <form method="POST" action="">
-        <h2>Profile</h2>
+
         {{ form.hidden_tag() }}
         <fieldset class="form-group">
             <legend class="border-bottom mb-4">{{ legend }}</legend>
@@ -45,19 +45,6 @@
                     </div>
                 {% else %}
                     {{ form.lname(class="form-control form-control-lg") }}
-                {% endif %}
-            </div>
-            <div class="form-group">
-                {{ form.account_active.label(class="form-control-label") }}
-                {% if form.account_active.errors %}
-                    {{ form.account_active(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.account_active.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form.account_active(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
             <div class="form-group">

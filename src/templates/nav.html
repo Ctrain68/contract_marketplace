@@ -3,8 +3,8 @@
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link active" href="/home">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="features.html">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('profile_route.profile_route_profile', username=profile.username) }}">Profile</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('profile_route.profile_route_create') }}">Update/Create Profile</a></li>
+                <li class="nav-item"><a class="nav-link" href=/api/profile/all>Profiles</a></li>
                 <li class="nav-item"><a class="nav-link" href="/contract/all">Contracts</a></li>
                 {% if current_user.is_authenticated %}
                 <li class="nav-item"><a class="nav-link" href="{{ url_for('user.user_logout') }}">log out</a></li>
