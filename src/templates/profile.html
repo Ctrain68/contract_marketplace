@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block content %}
+  <article class="media content-section">
+    <img class="rounded-circle article-img" >
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2">{{ profile.fname }} {{ profile.lname }}</a>
+      </div>
+      <h2 class="article-title">{{ profile.username }}</h2>
+    </div>
+  </article>
+{% endblock content %}

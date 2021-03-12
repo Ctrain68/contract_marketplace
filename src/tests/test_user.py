@@ -21,7 +21,7 @@ class TestProfiles(unittest.TestCase):
 
 
     def test_user_register(self):
-        response = self.client.post("/register",                   
+        response = self.client.post("/api/register",                   
         json = {                                                        
             "email": "test11@test.com",
             "password": "123456"
@@ -29,7 +29,7 @@ class TestProfiles(unittest.TestCase):
         self.assertEqual(response.status_code, 200)                     
         data = response.get_json()                                      
 
-        response = self.client.post("/login",                      
+        response = self.client.post("/api/login",                      
         json = {                                                        
             "email": "test11@test.com",
             "password": "123456"
@@ -39,7 +39,7 @@ class TestProfiles(unittest.TestCase):
        
 
     def test_user_login(self):
-        response = self.client.post("/login",                       
+        response = self.client.post("/api/login",                       
         json = {                                                         
             "email": "test1@test.com",
             "password": "123456"

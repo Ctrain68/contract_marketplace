@@ -6,6 +6,7 @@ from src.models.User import User
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from src.services.auth_services import verify_user
 from sqlalchemy.sql import func, label
+from sqlalchemy.orm import joinedload
 from src import db
 import os
 import json
@@ -18,18 +19,13 @@ engagement = Blueprint("engagement", __name__, url_prefix="/contract/engagement"
    
 
 
-@engagement.route("/all", methods=["GET"])
-def engagement_index():
-    query = db.session.query(Engagement)
+# @engagement.route("/all", methods=["GET"])
+# def engagement_index():
+#     query = db.session.query(Engagement)
 
-    return jsonify(engagements_schema.dump(query))
+#     return jsonify(engagements_schema.dump(query))
 
 
-# @engagement.route("/active", methods=["GET"])
-# def engagement_index_active():
- 
-#     query = db.session.query(Profile).filter(Profile.account_active).order_by(Profile.fname)
-#     return jsonify(profiles_schema.dump(query))
 
 
 
@@ -43,23 +39,23 @@ def engagement_index():
 #     user_id = get_jwt_identity()
 
     
-#     profile_fields = profile_schema.load(request.json)
+#     engagement_fields = engagement_schema.load(request.json)
 
-#     profile = Profile.query.get(user_id)
+#     contract = Contract.query.get(profile_id)
 
-#     if not profile:
+#     if not engagement:
     
-#         new_profile = Profile()
-#         new_profile.username = profile_fields["username"]
-#         new_profile.fname = profile_fields["fname"]
-#         new_profile.lname = profile_fields["lname"]
-#         new_profile.account_active=profile_fields["account_active"]
-#         new_profile.employer=profile_fields["employer"]
-#         new_profile.employer=profile_fields["contractor"]
+#         new_engagement = Engagement()
+#         new_engagement.capacity_in_days = engagement_fields["capacity_in_days"]
+#         new_engagement.hours_of_work = engagement_fields["hours_of_work"]
+#         new_engagement.start_date = engagement_fields["start_date"]
+#         new_engagement.end_date=engagement_fields["end_date"]
+#         new_engagement.contract_rate=engagement_fields["contract_rate"]
         
-#         user.profile.append(new_profile)
         
-#         db.session.add(new_profile)
+#         contract.engagement.append(new_engagement)
+        
+#         db.session.add(new_engagement)
 #         db.session.commit()
         
 #         return jsonify(profile_schema.dump(new_profile))

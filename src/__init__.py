@@ -54,6 +54,11 @@ def create_app():
     for controller in registerable_controllers:
         app.register_blueprint(controller)
 
+    from src.routes import registerable_controllers
+
+    for controller in registerable_controllers:
+        app.register_blueprint(controller)
+
     @app.errorhandler(ValidationError)
     def handle_bad_request(error):
         return (jsonify(error.messages), 400)

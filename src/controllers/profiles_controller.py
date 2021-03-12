@@ -11,13 +11,8 @@ import json
 
 
 
-profile = Blueprint("profile", __name__, url_prefix="/profile")
-
-# @profile.route("/", methods=["GET"])
-# def profile_sparkles():
-#         return render_template('home.html')
-
-   
+profile = Blueprint("profile", __name__, url_prefix="/api/profile")
+ 
 
 
 @profile.route("/all", methods=["GET"])
@@ -26,12 +21,6 @@ def profile_index():
 
     return jsonify(profiles_schema.dump(query))
 
-
-@profile.route("/active", methods=["GET"])
-def profile_index_active():
- 
-    query = db.session.query(Profile).filter(Profile.account_active).order_by(Profile.fname)
-    return jsonify(profiles_schema.dump(query))
 
 
 

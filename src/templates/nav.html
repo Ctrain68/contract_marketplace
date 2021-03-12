@@ -1,0 +1,17 @@
+<nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
+    <div class="container"><a class="navbar-brand logo" href="#">Contract Marketplace</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+            <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link active" href="/home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="features.html">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('profile_route.profile_route_profile', username=profile.username) }}">Profile</a></li>
+                <li class="nav-item"><a class="nav-link" href="/contract/all">Contracts</a></li>
+                {% if current_user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('user.user_logout') }}">log out</a></li>
+                {% else %}
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('user.user_login') }}">log in</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

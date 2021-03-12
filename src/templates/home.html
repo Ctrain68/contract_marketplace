@@ -1,13 +1,13 @@
 {% extends "layout.html" %}
 {% block content %}
-        <article class="media content-section">
-          <div class="media-body">
-            <div class="article-metadata">
-              <a class="mr-2" href="#"></a>
-              <small class="text-muted">Category </small>
-            </div>
-            <h2><a class="article-title" href="#">Welcome to my shitty website</a></h2>
-
-          </div>
-        </article>
+<main class="page landing-page">
+  <section class="clean-block clean-hero" style="background-image:url{{ url_for('static', filename='assets/img/tech/image4.jpg') }};color:rgba(9, 162, 255, 0.85);">
+      <div class="text">
+          <h2>Contracts designed to be flexible around you.</h2>
+          <a></a>
+          <p></p><button class="btn btn-outline-light btn-lg" type="button">Sign Up</button>
+      </div>
+  </section>
+  <section class="clean-block features"></section>
+</main>
 {% endblock %}
